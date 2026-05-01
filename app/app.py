@@ -58,7 +58,7 @@ def home():
     </head>
     <body>
         <h1>DevOps Portfolio Dashboard</h1>
-        <p>Built and deployed by <strong>Kush Dhuvad</strong></p>
+        <p>Built and deployed by <strong>Kush Dhuvad with CI/CD 🚀</strong></p>
 
         <div class="card">
             <h2>About This Project</h2>
