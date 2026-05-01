@@ -93,7 +93,7 @@ def home():
 
         <div class="card">
             <h2>System Status</h2>
-            <p>Status: <span class="status">OPERATIONAL</span></p>
+            <p>Status: <span class="status">OPERATIONAL v2.0 - Deployed via CI/CD 🚀</span></p>
             <p>Check <a href="/health">/health</a> 
                for real-time status</p>
         </div>
