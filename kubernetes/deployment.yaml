@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+
+kind: Deployment
+metadata:
+  name: portfolio
+  labels:
+    app: portfolio
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: portfolio
+
+  template:
+    metadata:
+      labels:
+        app: portfolio
+
+    spec:
+      containers:
+        - name: portfolio
+          image: kushdhuvad9/devops-portfolio
+          ports:
+            - containerPort: 5000
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
+
+          livenessProbe:
+            httpGet: 
+                path: /health
+                port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            failureThreshold: 3
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          env:
+            - name: ENV
+              value: "production"
+            - name: PORT
+              value: "5000"

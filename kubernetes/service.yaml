@@ -1,0 +1,21 @@
+apiVersion: v1
+
+# What are we creating? A Service.
+kind: Service
+
+metadata:
+  name: portfolio-service
+
+spec:
+  # NodePort = makes the app accessible from outside the cluster
+  type: NodePort
+
+  # Route traffic to Pods with label "app: portfolio"
+  selector:
+    app: portfolio
+
+  ports:
+    - protocol: TCP
+      port: 80           # Port the Service listens on
+      targetPort: 5000   # Port on the Pod to forward to
+      nodePort: 30001    # Port on the machine to access from browser
