@@ -1,0 +1,32 @@
+groups:
+  - name: flask_app_alerts
+    rules:
+      # Alert if app is down for more than 1 minute
+      - alert: AppDown
+        expr: up{job="flask-app"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Flask app is DOWN"
+          description: "The portfolio app has been unreachable for more than 1 minute"
+
+      # Alert if CPU is too high
+      - alert: HighCPU
+        expr: app_cpu_usage_percent > 80
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage detected"
+          description: "CPU usage has been above 80% for 2 minutes"
+
+      # Alert if error rate is too high
+      - alert: HighErrorRate
+        expr: rate(flask_http_request_total{status=~"5.."}[5m]) > 0.1
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High error rate detected"
+          description: "More than 10% of requests are returning 5xx errors"
